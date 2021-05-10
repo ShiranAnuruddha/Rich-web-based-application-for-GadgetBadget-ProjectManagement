@@ -6,9 +6,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/projectAPI")
 
 public class projectAPI extends HttpServlet {
 
@@ -40,7 +43,7 @@ public class projectAPI extends HttpServlet {
 			 throws ServletException, IOException
 			{
 			 Map paras = getParasMap(request);
-			 String output = projectObj.updateProject(paras.get("hidItemIDSave").toString(),
+			 String output = projectObj.updateProject(paras.get("hidProjectIDSave").toString(),
 			 paras.get("authorName").toString(),
 			 paras.get("projectCategory").toString(),
 			paras.get("projectName").toString(),

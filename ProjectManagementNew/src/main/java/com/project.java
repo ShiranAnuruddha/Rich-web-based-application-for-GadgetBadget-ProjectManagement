@@ -17,6 +17,8 @@ public class project {
 
 	 //Provide the correct details: DBServer/DBName, username, password
 	 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectmanagement", "root", "");
+	 System.out.println("sas");
+	 
 	 }
 	 catch (Exception e)
 	 {e.printStackTrace();}
@@ -55,6 +57,7 @@ public String insertProject(String aname, String pcategory, String ptitile,Strin
 	 {
 		 output = "{\"status\":\"error\", \"data\": \"Error while inserting the project.\"}";
 		 System.err.println(e.getMessage()); 
+		 
 	 }
 	 return output;
 	 }
@@ -69,13 +72,13 @@ if (con == null)
 {return "Did'nt connect to the database"; }
 //Prepare the html table to be displayed
 output = "<table border='1'>"
-       +"<tr><th>Project Id</<th>"
-	   +"<th>Author Name</th>"
+	   +"<tr><th>Author Name</th>"
        +"<th>Project Category</th>" 
        +"<th>Project Name</th>" 
        +"<th>Project Price ($)</th>" 		
        +"<th>Author Email </th>" 
-       +"<th>Project Description<th></tr>";
+       +"<th>Project Description</th>"
+       +"<th>Update</th><th>Remove</th></tr>";
 
 String query = "select * from project";
 Statement stmt = con.createStatement();
@@ -90,9 +93,12 @@ String projectName = rs.getString("projectName");
 String projectPrice = Double.toString(rs.getDouble("projectPrice"));
 String authorEmail = rs.getString("authorEmail");
 String projectDesc = rs.getString("projectDesc");
+
+System.out.println(projectID);
+
 //Add into the html table
-output += "<tr><td><input id='hidItemIDUpdate' name='hidItemIDUpdate' type='hidden' value='" + projectID 
-          + "'>" + authorName + "</td>";	
+output += "<tr><td><input id='hidProjectIDUpdate' name='hidProjectIDUpdate' type='hidden' value='" + projectID 
+       + "'>" + authorName + "</td>";	
 output += "<td>" + projectCategory + "</td>";
 output += "<td>" + projectName + "</td>";
 output += "<td>" + projectPrice + "</td>";
@@ -100,9 +106,10 @@ output += "<td>" + authorEmail + "</td>";
 output += "<td>" + projectDesc + "</td>";
 
 //buttons
-output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-       + "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-       + "data-projectid='" + projectID + "'></td></tr>";
+output += "<td><input name='btnUpdate' type='button' value='Update' "
+	   + "class='btnUpdate btn btn-secondary'></td>"
+       + "<td><input name='btnRemove' type='button' value='Remove'"
+       + "class='btnRemove btn btn-danger' data-projectid='" + projectID + "'></td></tr>";
 }
 con.close();
 //Complete the html table
@@ -174,7 +181,7 @@ public String deleteProject(String projectID)
 	 }
 	 catch (Exception e)
 	 {
-		 output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}";
+		 output = "{\"status\":\"error\", \"data\": \"Error while deleting the Project.\"}";
 		 System.err.println(e.getMessage()); 
 	 }
 	 return output;
