@@ -94,7 +94,7 @@ String projectPrice = Double.toString(rs.getDouble("projectPrice"));
 String authorEmail = rs.getString("authorEmail");
 String projectDesc = rs.getString("projectDesc");
 
-System.out.println(projectID);
+
 
 //Add into the html table
 output += "<tr><td><input id='hidProjectIDUpdate' name='hidProjectIDUpdate' type='hidden' value='" + projectID 
