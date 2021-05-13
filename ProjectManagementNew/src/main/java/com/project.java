@@ -17,7 +17,7 @@ public class project {
 
 	 //Provide the correct details: DBServer/DBName, username, password
 	 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectmanagement", "root", "");
-	 System.out.println("sas");
+	
 	 
 	 }
 	 catch (Exception e)
